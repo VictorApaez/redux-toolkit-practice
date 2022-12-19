@@ -1,6 +1,6 @@
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addSong, removeSong } from "./store/index";
+import { addSong, removeSong, resetState } from "./store/index";
 import { useRef } from "react";
 
 function App() {
@@ -17,17 +17,26 @@ function App() {
     // dispatch is build into redux
     e.preventDefault();
     dispatch(addSong(songInput.current.value));
+    songInput.current.value = "";
   }
   function handleRemoveSong(song) {
     console.log(song);
     dispatch(removeSong(song));
   }
 
+  function resetAll() {
+    dispatch(resetState());
+  }
+
   return (
     <div className="app">
       <form onSubmit={(e) => handleAddSong(e)}>
         <input type="text" ref={songInput} />
+
         <button>Add</button>
+        <div className="reset" onClick={resetAll}>
+          Reset All
+        </div>
       </form>
 
       <ul>
