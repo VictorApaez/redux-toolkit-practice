@@ -1,7 +1,11 @@
-npm install @reduxjs/toolkit
-npm install react-redux
+# Redux getting started
 
-create store folder
-export store are reducers
+Here you will find a simple demo using React and Redux.
 
-In index.js, wrap app with Provider and pass store as prop
+### Packaged used:
+
+---
+
+    npx install create-react-app
+    npm install @reduxjs/toolkit
+    npm install react-redux
