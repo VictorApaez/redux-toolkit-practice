@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addSong, removeSong } from "./store/index";
+import { useRef } from "react";
 
 function App() {
+  const songInput = useRef();
+  const dispatch = useDispatch();
+
+  // this will update whenever we make changes to state using dispatch
+  const songs = useSelector((state) => {
+    return state.songs;
+  });
+
+  function handleAddSong(e) {
+    // addSong is the reducer we created in store/index.js
+    // dispatch is build into redux
+    e.preventDefault();
+    dispatch(addSong(songInput.current.value));
+  }
+  function handleRemoveSong(song) {
+    console.log(song);
+    dispatch(removeSong(song));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <form onSubmit={(e) => handleAddSong(e)}>
+        <input type="text" ref={songInput} />
+        <button>Add</button>
+      </form>
+
+      <ul>
+        {songs.map((song, i) => {
+          return (
+            <div className="song" key={i}>
+              <li>{song}</li>
+              <button onClick={() => handleRemoveSong(song)}>remove</button>
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 }
