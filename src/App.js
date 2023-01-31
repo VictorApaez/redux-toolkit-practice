@@ -14,7 +14,7 @@ function App() {
 
   function handleAddSong(e) {
     // addSong is the reducer we created in store/index.js
-    // dispatch is build into redux
+    // dispatch is built into redux
     e.preventDefault();
     dispatch(addSong(songInput.current.value));
     songInput.current.value = "";
